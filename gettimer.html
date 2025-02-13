@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            
+        }
+        body{
+            height: 100vh;
+            background-color:darkcyan;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        p#countDown{
+            color: white;
+            font-size: 80px;
+            font-weight: 300;
+        }
+        .button{
+       
+            margin: 1rem;
+        }
+        button{
+            height: 4rem;
+            width: 9rem;
+            border-radius: 2rem;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 19px 3px 41px 0px;
+        }
+        .button:hover{
+            color: lightgray;
+        }
+        .first{
+            height: 43rem;
+            width: 31rem;
+            background-color: #336f71;
+            border-radius: 31px;
+        }
+        .grid{
+            display: grid;
+        }
+        .grid-four--cols{
+    grid-template-columns: repeat(3 ,1fr);
+    padding: 29px 0px 0px 59px;
+    gap: 4rem;
+}
+.grid-1--cols{
+    grid-template-columns: repeat(1 ,1fr);
+   
+}
+.Reset-btn{
+    margin: 52px -1px 42px -13px;
+}
+.start-btn{
+    margin: -13px;
+}
+.stop-btn{
+    margin-left: -12px;
+}
+.clear-btn{
+    margin: 0px 0px 81px 0px;
+}
+p{
+    font-size: 30px;
+    font-weight: 200;
+   display: flex;
+   justify-content: center;
+}
+    </style>
+</head>
+<body>
+    <section class="first">
+        <p id="countDown">0</p>
+        <div class="hello grid grid-four--cols">
+        <div class="button">
+            <button class="start-btn">Start</button>
+            <button class="Reset-btn">Reset</button>
+            <button class="stop-btn">Stop</button>
+        </div>
+        <div class="sec grid grid-1--cols">
+            <button class="time-btn">getTime</button>
+            <button class="clear-btn">clearTime</button>
+        </div>
+        </div>
+        <div class="resetValue"></div>
+    </section>
+    <script>
+        const count = document.getElementById("countDown");
+        const reeset = document.querySelector(".resetValue");
+        let startcount = 0;
+        let IntervalId = 0;
+ // function to start the timer
+        const startTimer = () => {
+           IntervalId = setInterval(() => {
+            count.innerText = startcount++ ;
+                },1000);
+         };
+// function to reset the timer
+        const resetTimer = () => {
+            startcount = 0;
+            count.innerText = startcount;
+            clearInterval(IntervalId);
+        }
+// function to stop the timer and show stop time
+        const stopTimer = () => {
+            showStopValue();
+            clearInterval(IntervalId);
+        }
+// function to show stop time
+        const showStopValue = () => {
+            let newPara = document.createElement("p");
+            newPara.innerText = `The stop Time is ${startcount}`;
+            reeset.append(newPara);
+        };
+
+// function to show clear value
+        const clearTimerValue = () => {
+            reeset.innerHTML = "";
+           
+        };
+// Event Listeners
+     
+        document
+        .querySelector(".start-btn")
+        .addEventListener("click",startTimer);
+
+        document
+        .querySelector(".Reset-btn")
+        .addEventListener("click",resetTimer);
+
+        document
+        .querySelector(".stop-btn")
+        .addEventListener("click",stopTimer);
+
+        document
+        .querySelector(".time-btn")
+        .addEventListener("click",showStopValue);
+
+        document
+        .querySelector(".clear-btn")
+        .addEventListener("click",clearTimerValue);
+     
+    </script>
+</body>
+</html>
